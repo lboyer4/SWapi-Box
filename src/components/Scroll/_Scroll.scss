@@ -1,14 +1,9 @@
-* { 
-background-color: black;
- }
-
 .scroll-page {
-		background-color: #000;
     position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
+    // top:0;
+    // bottom:0;
+    // left:0;
+    // right:0;
     transform-origin:50% 100%;
     transform:perspective(300px) rotateX(15deg);
     overflow: hidden;
@@ -17,8 +12,9 @@ background-color: black;
 .scroll-element {
 	display: flex;
 	justify-content: center;
-	height: 800px;
-	perspective: 400px;
+	position: relative;
+	height: 400px;
+	perspective: 200px;
 	color: #feda4a;
 	font-family: 'Pathway Gothic One', sans-serif;
 	font-size: 200%;
@@ -30,19 +26,20 @@ background-color: black;
 
 .crawl {
 	position: relative;
+	// top: 1px;
 	transform-origin: 50% 100%;
 	animation: crawl 60s linear;
-}
+	}
 
 @keyframes crawl {
 	0% {
-		top: 0;
+		top: 0px;
 		transform: rotateX(20deg) translateZ(0);
 	}
 
 	100% {
 		top: -6000px;
-		transform: rotateX(25deg) translateZ(-2500px);
+		transform: rotateX(50deg) translateZ(-2500px);
 	}
 }
 
