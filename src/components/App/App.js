@@ -37,9 +37,14 @@ class App extends Component {
           .then(homeworld => {
             newPerson.homeworld= homeworld.name; 
             newPerson.worldPopulation= homeworld.population;
+        fetch(species)
+          .then(response=> response.json())
+          .then(species=> newPerson.species=species.name)
           })
+          console.log(newPerson)
 
-        console.log(newPerson)
+
+        return newPerson;
       }))
     
   }
