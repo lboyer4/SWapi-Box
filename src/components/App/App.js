@@ -48,8 +48,8 @@ class App extends Component {
       <main>
         <NavBar />
         <Buttons />
-        <Scroll />
-        {/*<CardContainer people={this.state.people} />*/}
+        {/*<Scroll />*/}
+        <CardContainer people={this.state.people} />
 
       </main>
       )

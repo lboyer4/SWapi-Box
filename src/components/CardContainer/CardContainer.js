@@ -1,25 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './_CardContainer.scss';
-// import 'Card' from '../Card/Card.js';
+import Card from '../Card/Card.js';
 
-class CardContainer extends Component{
-	constructor() {
-		super();
-		this.state = {
-			title: ''
-		}
-	}
-
-
-	render() {
-		return (
-			<section>
-				<h3>this.title</h3>
-				
-			</section>
-		)
-	}
-
+function CardContainer({ people }) {
+	const displayCard = people.map(person => {
+	return <Card {...person} key={person.id} />
+	})
+	return (
+		<div>
+			{displayCard}
+		</div>
+	)
 }
 
 export default CardContainer;
