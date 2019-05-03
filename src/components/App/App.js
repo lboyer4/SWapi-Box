@@ -1,70 +1,55 @@
 import React, { Component } from 'react';
 import './_App.scss';
 import NavBar from '../NavBar/NavBar.js';
+import CardContainer from '../CardContainer/CardContainer.js';
 import Scroll from '../Scroll/Scroll.js';
 import Buttons from '../Buttons/Buttons.js'
+import { fetchCategories } from '../apiCalls/apiCalls.js';
+import { fetchHomeWorld } from '../apiCalls/apiCalls.js';
+import { fetchSpecies } from '../apiCalls/apiCalls.js';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      film: {}
+      people: [],
+      planets:[],
+      vehicles:[]
     }
   }
 
-  componentDidMount = () => {
-    fetch('https://swapi.co/api/films')
-      .then(response => response.json())
-      .then(result => {
-        const film = this.findFilm(result.results);
-        this.setState({ film });
-      })
-      .catch(error => console.log(error))
 
-    const categoryUrls = ['https://swapi.co/api/people']
-    const ious = categoryUrls.map(url => {
-      return fetch(url).then(response => response.json())
-    })
-    
+   componentDidMount = () => {
+    const ious = fetchCategories()
     const allPromises = Promise.all(ious)
-      allPromises.then(data => 
-        data[0].results
-      .map(person=> {
+    allPromises.then(data => {
+      const people = data[0].results.map(person=> {
         const {name, homeworld, species} = person
-        const newPerson = {name}
-        fetch(homeworld)
-          .then(response => response.json())
+        const newPerson = {name, id: Date.now()}
+        fetchHomeWorld(homeworld)
           .then(homeworld => {
             newPerson.homeworld= homeworld.name; 
             newPerson.worldPopulation= homeworld.population;
-        fetch(species)
-          .then(response=> response.json())
-          .then(species=> newPerson.species=species.name)
           })
-          console.log(newPerson)
-
-
+        fetchSpecies(species)
+          .then(species=> {
+            newPerson.species=species.name
+          })
         return newPerson;
-      }))
-    
-  }
-
-
-  
-
-  findFilm = (films) => {
-    return films[Math.floor(Math.random() * films.length)]
+      })
+      this.setState({ people });
+    })   
   }
 
 
   render() {
-    const scroll = this.state.film.opening_crawl
 
     return(
       <main>
         <NavBar />
         <Buttons />
-        <Scroll film={this.state.film} />
+        <Scroll />
+        {/*<CardContainer people={this.state.people} />*/}
 
       </main>
       )

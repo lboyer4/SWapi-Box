@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './_CardContainer.scss';
-import 'Card' from '../Card/Card.js'
+// import 'Card' from '../Card/Card.js';
 
 class CardContainer extends Component{
 	constructor() {
@@ -10,11 +10,12 @@ class CardContainer extends Component{
 		}
 	}
 
+
 	render() {
 		return (
 			<section>
 				<h3>this.title</h3>
-				<Card />
+				
 			</section>
 		)
 	}
@@ -22,3 +23,4 @@ class CardContainer extends Component{
 }
 
 export default CardContainer;
+

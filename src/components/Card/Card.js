@@ -23,4 +23,4 @@ class Card extends Component {
 
 
 
-export default CardContainer;
+export default Card;
