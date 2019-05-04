@@ -15,10 +15,11 @@ class App extends Component {
       loading: true,
       people: [],
       planets:[],
-      vehicles:[]
+      vehicles:[],
+      favorites: [],
+      category: ''
     }
   }
-
 
   componentDidMount = () => {
     const ious = fetchCategories();
@@ -51,16 +52,26 @@ class App extends Component {
     }); 
   }
 
+  setCategory = (category) => {
+    this.setState({category: category})
+  }
+
+
 
 
   render() {
+    const cardContainer= <CardContainer 
+          things={this.state[this.state.category]}
+         />
+    const crawl = <Scroll />   
+    let show = (this.state.category) ? cardContainer : crawl;
+
     return(
       <main>
         <NavBar />
-        <Buttons />
-        {/*<Scroll />*/}
-        <CardContainer people={this.state.people} />
-
+        <Buttons 
+          setCategory={this.setCategory} />
+        {show}
       </main>
       )
   }

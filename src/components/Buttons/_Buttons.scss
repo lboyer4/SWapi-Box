@@ -1,0 +1,10 @@
+.Buttons {
+	button {
+		&:active{
+			color: red;
+		}
+	}
+	.active {
+		background-color: pink;
+	}
+}
