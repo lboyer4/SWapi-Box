@@ -4,7 +4,16 @@ import Card from '../Card/Card.js';
 
 function CardContainer({ people }) {
 	const displayCard = people.map(person => {
-	return <Card {...person} key={person.id} />
+		return ( 
+			<Card 
+				name={person.name}
+				species={person.species}
+				homeworld={person.homeworld}
+				worldPopulation={person.worldPopulation}
+				id={person.id}
+				key={person.id} 
+			/>
+		)
 	})
 	return (
 		<div>

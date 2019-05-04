@@ -12,6 +12,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      loading: true,
       people: [],
       planets:[],
       vehicles:[]
@@ -19,31 +20,40 @@ class App extends Component {
   }
 
 
-   componentDidMount = () => {
-    const ious = fetchCategories()
-    const allPromises = Promise.all(ious)
-    allPromises.then(data => {
-      const people = data[0].results.map(person=> {
-        const {name, homeworld, species} = person
-        const newPerson = {name, id: Date.now()}
-        fetchHomeWorld(homeworld)
-          .then(homeworld => {
-            newPerson.homeworld= homeworld.name; 
-            newPerson.worldPopulation= homeworld.population;
-          })
-        fetchSpecies(species)
-          .then(species=> {
-            newPerson.species=species.name
-          })
-        return newPerson;
-      })
-      this.setState({ people });
-    })   
+  componentDidMount = () => {
+    const ious = fetchCategories();
+    Promise.all(ious)
+    .then(data => {
+      this.makePeople(data[0].results)
+    });
+  }
+
+  makePeople = (people) => {
+    const result = people.map((person, index) => {
+      return this.makePerson(person, index)
+    })
+    Promise.all(result)
+    .then(people => {
+      this.setState({ people })
+    });
+  }
+
+  makePerson = (person, index) => {
+    const {name, homeworld, species} = person;
+    const newPerson = {name, id: (Date.now()+index)};
+    const pendingPromises=[fetchHomeWorld(homeworld), fetchSpecies(species)];
+    return Promise.all(pendingPromises)
+    .then(promises => {
+      newPerson.homeworld = promises[0].name; 
+      newPerson.worldPopulation = promises[0].population;
+      newPerson.species = promises[1].name; 
+      return newPerson
+    }); 
   }
 
 
-  render() {
 
+  render() {
     return(
       <main>
         <NavBar />
