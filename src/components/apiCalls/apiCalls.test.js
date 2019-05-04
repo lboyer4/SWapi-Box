@@ -34,5 +34,10 @@ describe('fetchFilms', () => {
 
  		await expect (fetchFilms()).rejects.toEqual(Error('Error fetching film'))
  	});
+})
 
+describe('fetchCategories', () => {
+	let mockCategories;
+
+	
 })
