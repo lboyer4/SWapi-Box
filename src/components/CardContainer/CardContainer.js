@@ -2,11 +2,13 @@ import React from 'react';
 import './_CardContainer.scss';
 import Card from '../Card/Card.js';
 
-function CardContainer({ things }) {
+function CardContainer({ things, addFavorite, removeFavorite }) {
 	const displayCard = things.map(thing => {
 		return ( 
 			<Card 
 				{...thing}
+				addFavorite={addFavorite}
+				removeFavorite={removeFavorite}
 				key={thing.id}			
 			/>
 		)

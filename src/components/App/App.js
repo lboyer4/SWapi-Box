@@ -8,6 +8,7 @@ import { fetchCategories } from '../apiCalls/apiCalls.js';
 import { fetchHomeWorld } from '../apiCalls/apiCalls.js';
 import { fetchSpecies } from '../apiCalls/apiCalls.js';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -26,7 +27,37 @@ class App extends Component {
     Promise.all(ious)
     .then(data => {
       this.makePeople(data[0].results)
+      this.makePlanets(data[1].results)
+      this.makeVehicles(data[2].results)
     });
+  }
+
+  makeVehicles = (vehicles) => {
+    vehicles = vehicles.map((vehicle, index) => {
+      return this.makeVehicle(vehicle, index)
+    })
+    this.setState( {vehicles} )
+
+  }
+
+  makeVehicle = (vehicle, index) => {
+    const {name, model, vehicle_class, passengers} = vehicle;
+    return {name, model, vehicle_class, passengers, id: (Date.now()+index+300)}
+  }
+
+  makePlanets = (planets) => {
+    const result = planets.map((planet, index) => {
+      return this.makePlanet(planet, index)
+    })
+    Promise.all(result)
+    .then(planets => {
+      this.setState( { planets })
+    })
+  }
+
+  makePlanet = (planet, index) => {
+    const {name, terrain, population, climate, residents} = planet;
+    return {name, terrain, population, climate, residents: residents.length, id: (Date.now()+index+100)};
   }
 
   makePeople = (people) => {
@@ -56,12 +87,31 @@ class App extends Component {
     this.setState({category: category})
   }
 
+  addFavorite = (id) => {
+    const {people, planets, vehicles, favorites} = this.state;
+    const isAlreadyFavorited = favorites.find(favorite => {
+     return favorite.id === id
+    })
+    if (isAlreadyFavorited) return;
+    const newFavorite = [...people, ...planets, ...vehicles].find(element => {
+      return element.id === id; 
+    })
+    this.setState( {favorites: [...favorites, newFavorite]})
+  }
 
-
+  removeFavorite = (id) => {
+    let {favorites} = this.state;
+    favorites = favorites.filter(favorite => {
+      return favorite.id !== id 
+    })
+    this.setState( { favorites })
+  }
 
   render() {
     const cardContainer= <CardContainer 
           things={this.state[this.state.category]}
+          addFavorite={this.addFavorite}
+          removeFavorite={this.removeFavorite}
          />
     const crawl = <Scroll />   
     let show = (this.state.category) ? cardContainer : crawl;
@@ -70,7 +120,8 @@ class App extends Component {
       <main>
         <NavBar />
         <Buttons 
-          setCategory={this.setCategory} />
+          setCategory={this.setCategory}
+          favoriteCount={this.state.favorites.length} />
         {show}
       </main>
       )

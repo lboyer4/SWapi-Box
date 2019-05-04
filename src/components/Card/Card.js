@@ -11,21 +11,23 @@ class Card extends Component {
 	}
 
 	handleClick = (e) => {
+		const {id, addFavorite, removeFavorite} = this.props;
 		const favorited = !this.state.favorited
 		this.setState({favorited})
-		if (favorited) {
-			e.target.parentElement.classList += 'favorited';
-		} else {
-			e.target.parentElement.classList = '';
-		}	
-	}
+		favorited ? addFavorite(id) : removeFavorite(id)
+		} 
+
 
 	render() {
-		const cardData = Object.keys(this.props).map(key => {
-			return <h5>{ this.props[key] }</h5>
+		const cardData = Object.keys(this.props).map((key, index) => {
+			const acceptedKey = key !== 'id' && key !== 'addFavorite' && key !== 'removeFavorite';
+			return acceptedKey && <h5 key={index}> {key}: { this.props[key] }</h5>
 		})
+
+		const favorited = this.state.favorited ? 'favorited' : ''
 		return (
-			<article>
+			<article className={favorited}>
+
 				{cardData}
 				<button onClick={this.handleClick}>favorite</button>		
 			</article>
