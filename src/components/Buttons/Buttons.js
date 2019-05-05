@@ -11,11 +11,11 @@ function Buttons({setCategory, favoriteCount}) {
 
 	return (
 		<div className="Buttons">
-			<button name="people" onClick={handleClick}>People</button>
-			<button name="planets" onClick={handleClick}>Planets</button>
-			<button name="vehicles" onClick={handleClick}>Vehicles</button>
-			<button name="favorites" onClick={handleClick}>Favorites <span>{favoriteCount}</span></button>
-			<button name="" onClick={handleClick}>Home</button>
+			<button id="red-planet" name="people" onClick={handleClick}>People</button>
+			<button id="orange-planet"name="planets" onClick={handleClick}>Planets</button>
+			<button id="blue-planet" name="vehicles" onClick={handleClick}>Vehicles</button>
+			<button id="green-planet" name="favorites" onClick={handleClick}>Favorites <span>{favoriteCount}</span></button>
+			<button id="purple-planet" name="" onClick={handleClick}>Home</button>
 		</div>
 	)
 }

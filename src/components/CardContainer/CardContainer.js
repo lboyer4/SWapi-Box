@@ -14,7 +14,7 @@ function CardContainer({ things, addFavorite, removeFavorite }) {
 		)
 	})
 	return (
-		<div className="card-container">
+		<div id="card-container">
 			{displayCard}
 		</div>
 	)
