@@ -40,4 +40,13 @@
 	#active {
 		background-color: pink;
 	}
+	
+	button {
+		&:hover{
+			height: 100px;
+		}
+		&:active{
+			color: red;
+		}
+	}
 }
