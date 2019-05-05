@@ -2,21 +2,19 @@ import React from 'react';
 import './_CardContainer.scss';
 import Card from '../Card/Card.js';
 
-function CardContainer({ people }) {
-	const displayCard = people.map(person => {
+function CardContainer({ things, addFavorite, removeFavorite }) {
+	const displayCard = things.map(thing => {
 		return ( 
 			<Card 
-				name={person.name}
-				species={person.species}
-				homeworld={person.homeworld}
-				worldPopulation={person.worldPopulation}
-				id={person.id}
-				key={person.id} 
+				{...thing}
+				addFavorite={addFavorite}
+				removeFavorite={removeFavorite}
+				key={thing.id}			
 			/>
 		)
 	})
 	return (
-		<div>
+		<div id="card-container">
 			{displayCard}
 		</div>
 	)

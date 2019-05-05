@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
 import './_Card.scss';
 
+
 class Card extends Component {
 	constructor() {
 		super();
 		this.state = {
-
+			favorited: false
 		}
 	}
 
-	render() {
-		const { name, species, id, homeworld, worldPopulation } = this.props;
-		// console.log( this.props )
-		return (
-			<article>
-				<h3>{name}</h3>
-				<h5>{species}</h5>
-				<h5>{homeworld}</h5>
-				<h6>{worldPopulation}</h6>
-				<button>favorite</button>
-			</article>
+	handleClick = (e) => {
+		const {id, addFavorite, removeFavorite} = this.props;
+		const favorited = !this.state.favorited
+		this.setState({favorited})
+		favorited ? addFavorite(id) : removeFavorite(id)
+		} 
 
-			)
+
+	render() {
+		const cardData = Object.keys(this.props).map((key, index) => {
+			const acceptedKey = key !== 'id' && key !== 'addFavorite' && key !== 'removeFavorite';
+			return acceptedKey && <h5 key={index}> {key}: { this.props[key] }</h5>
+		})
+
+		const favorited = this.state.favorited ? 'favorited' : ''
+		return (
+			<article className={favorited}>
+
+				{cardData}
+				<button onClick={this.handleClick}>favorite</button>		
+			</article>
+		)
 	}
 }
 

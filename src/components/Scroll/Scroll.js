@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Crawl from 'react-star-wars-crawl'
 import './_Scroll.scss';
 import { fetchFilms } from '../apiCalls/apiCalls.js';
 

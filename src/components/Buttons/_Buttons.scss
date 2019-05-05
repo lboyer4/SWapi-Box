@@ -1,0 +1,43 @@
+.Buttons {
+	display: flex;
+	position: relative;
+	z-index: 10;
+	justify-content: space-evenly;
+
+	button {
+		&:hover{
+			height: 100px;
+		}
+		&:active{
+			color: red;
+		}
+	}
+
+	#red-planet,
+	#orange-planet,
+	#blue-planet,
+	#green-planet, 
+	#purple-planet {
+		background-color: #491885;
+		height: 80px;
+		width: 80px;
+		border-radius: 50px;
+		
+	}
+
+	#red-planet {
+		background-color: #B6130F;
+	}
+	#orange-planet {
+		background-color: #C76125;
+	}
+	#blue-planet {
+		background-color: #0A2C8B;
+	}
+	#green-planet {
+		background-color: #408518;
+	}
+	#active {
+		background-color: pink;
+	}
+}
