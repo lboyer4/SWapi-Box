@@ -29,7 +29,7 @@ class Card extends Component {
 			<article className={favorited}>
 
 				{cardData}
-				<button onClick={this.handleClick}>favorite</button>		
+				<button className="favorite" onClick={this.handleClick}>FAVORITE</button>		
 			</article>
 		)
 	}

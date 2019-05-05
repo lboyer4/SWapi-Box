@@ -1,12 +1,29 @@
 article {
-	height: 300px;
+	height: 260px;
 	width: 250px;
-	border: 2px solid blue;
-	background-color: #fff;
+	border: 2px solid #412234;
+	background-color: #EAD7D7;
 	color: black;
 	margin: 10px;
+	text-align: center;
+	border-radius: 10px;
 }
 
 .favorited {
-	background-color: blue;
+	background-color: #B49FCC;
+
+}
+
+.favorite {
+	height: 20px;
+	width: 90px;
+	color: #fff;
+	background-color: #6D466B;
+	margin: auto;
+	border-radius: 5px;
+}
+
+.favorite:hover {
+	background-color: #412234;
+	height: 24px;
 }
