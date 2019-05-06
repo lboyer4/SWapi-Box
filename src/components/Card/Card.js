@@ -10,7 +10,7 @@ class Card extends Component {
 		}
 	}
 
-	handleClick = (e) => {
+	handleClick = () => {
 		const {id, addFavorite, removeFavorite} = this.props;
 		const favorited = !this.state.favorited
 		this.setState({favorited})

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Buttons } from './Buttons.js';
+import Buttons from './Buttons.js';
 
 describe('Buttons', () => {
 	let wrapper;
@@ -8,14 +8,16 @@ describe('Buttons', () => {
 	const mockSetCategory= jest.fn();
 	const mockFavoriteCount = 1;
 	const mockEvent = jest.fn()
+	const mockTargetName = 'person'
 
-	beforeEach(( => {
+	beforeEach(() => {
+
 		wrapper = shallow(
 			<Buttons
-			setCategory=mockSetCategory
-			favoriteCount=mockFavoriteCount
+			setCategory={mockSetCategory}
+			favoriteCount={mockFavoriteCount}
 			/> 
-		) 
+		); 
 	});
 
 	it('should match snapshot', () => {
@@ -24,6 +26,6 @@ describe('Buttons', () => {
 
 	it('should call set category', () => {
 		wrapper.instance().handleClick(mockEvent);
-		expect(setCategory).toHaveBeenCalled();
+		expect(mockSetCategory).toHaveBeenCalledWith(mockTargetName);
 	});
 })

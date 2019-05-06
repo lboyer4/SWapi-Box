@@ -2,6 +2,7 @@ import React from 'react';
 import './_Buttons.scss';
 
 function Buttons({setCategory, favoriteCount}) {
+	
 	function handleClick(e) {     e.target.parentElement.querySelectorAll('button').forEach(button => {
       button.classList = ''
     })

@@ -3,6 +3,7 @@ import './_Scroll.scss';
 import { fetchFilms } from '../apiCalls/apiCalls.js';
 
 
+
 class Scroll extends Component {
 	constructor() {
 		super();
