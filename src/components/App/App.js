@@ -7,6 +7,7 @@ import Buttons from '../Buttons/Buttons.js'
 import { fetchCategories } from '../apiCalls/apiCalls.js';
 import { fetchHomeWorld } from '../apiCalls/apiCalls.js';
 import { fetchSpecies } from '../apiCalls/apiCalls.js';
+import PropTypes from "prop-types"
 
 
 class App extends Component {
@@ -126,6 +127,10 @@ class App extends Component {
       </main>
       )
   }
+}
+
+App.propTypes = {
+  people:PropTypes.array
 }
 
 

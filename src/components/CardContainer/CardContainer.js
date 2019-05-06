@@ -3,6 +3,7 @@ import './_CardContainer.scss';
 import Card from '../Card/Card.js';
 
 function CardContainer({ things, addFavorite, removeFavorite }) {
+	
 	const displayCard = things.map(thing => {
 		return ( 
 			<Card 
